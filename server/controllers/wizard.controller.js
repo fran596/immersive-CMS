@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 
 function setUp(req, res) {
-  console.log('estoy aqui')
   let database = req.body.db;
   let port = req.body.port
   let siteName = req.body.site;
@@ -16,6 +15,7 @@ function setUp(req, res) {
     username: username,
     password: password
   })
+  
   /*Insert user in Users collection */
   newUser.save((err, todos) => {
     if(err){

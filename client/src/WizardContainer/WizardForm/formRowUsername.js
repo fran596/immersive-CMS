@@ -5,7 +5,10 @@ const formRowUsername = (props) => (
   <div className="form-group row">
     <label htmlFor="example-search-input" className="col-2 col-form-label font-weight-bold">Username</label>
     <div className="col-sm-6">
-      <input className="form-control" type="search" autoComplete="on" value={props.value} onChange={props.onUsernameChange} />
+      <input className="form-control" type="search" autoComplete="on" value={props.valueLink.value} onChange={e => props.valueLink.set( e.target.value)} />
+      <div className="error-placeholder">
+        {props.valueLink.error || ''}
+      </div>
     </div>
     <div className="col-sm-4">
       <p>Your database username</p>
@@ -14,13 +17,11 @@ const formRowUsername = (props) => (
 )
 
 formRowUsername.propTypes = {
-  value : PropTypes.string,
-  onUsernameChange: PropTypes.func
+  valueLink : PropTypes.object
 }
 
 formRowUsername.defaultProps = {
-  value: '',
-  onUsernameChange: () => {}
+  valueLink: null
 }
 
 export default formRowUsername;
