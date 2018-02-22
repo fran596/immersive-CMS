@@ -3,7 +3,8 @@ import React from 'react'
 import Link from 'valuelink'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { setupUser } from '../Actions/Creators/actionCreators'
+import { ToastContainer } from 'react-toastify';
+import { setupUser, checkDB } from '../Actions/Creators/actionCreators'
 
 /*Form containers */
 import FormRowDB from './formRowDB'
@@ -15,6 +16,7 @@ import FormRowPassword from './formRowPassword'
 
 /* Validation regex for the port input */
 var numberRegexPattern = new RegExp('^[0-9]+$');
+var timer = 1;
 
 class wizardForm extends React.Component {
 
@@ -27,31 +29,63 @@ class wizardForm extends React.Component {
       username: '',
       password: ''
     },
+      //this.onDBnameChange = this.onDBnameChange.bind.this(this)
+    this.checkPrueba = this.checkPrueba.bind(this);
+    this.onDBcheck = this.onDBcheck.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onUsernameChange(ev) {
+  componentWillMount() {
+    this.props.checkDB()
+  }
+
+  onDBcheck(name) {
+    let dbs = this.props.dbs;
+    let res = true;
+    for (let i = 0; i < dbs.length; ++i) {
+      if (dbs[i] === name) {
+        res = false;
+        break;
+      }
+    }
+    if (dbs.length > 0) {
+      window.clearTimeout(timer)
+    }
+    return res;
+  }
+
+  onUsernameChange(ev, uLink) {
     this.setState({ username: ev.target.value })
+    this.setState({ boolUsername: false })
   }
 
   onPasswordChange(ev) {
     this.setState({ password: ev.target.value })
   }
 
+  checkPrueba() {
+    this.props.checkDB();
+    let dbs = this.props.dbs;
+    while (timer--) {
+      window.clearTimeout(timer)
+    }
+  }
+
+
+
   handleSubmit() {
-    console.log(this.state);
-    // this.props.setupUser(this.state);
+    this.props.setupUser(this.state, this.props.history)
   }
 
 
 
   render() {
-
     const dbNameLink = Link.state(this, 'db')
       .check(x => x, 'Database name is required')
-      .check(x => x.indexOf(' ') < 0, "The database name shouldn't contain spaces");
+      .check(x => x.indexOf(' ') < 0, "The database name shouldn't contain spaces")
+      .check(x => this.onDBcheck(x), "This database name is taken. Please choose a different one");
 
     const portLink = Link.state(this, 'port')
       .check(x => x.match(numberRegexPattern), 'The port must be a number')
@@ -60,29 +94,39 @@ class wizardForm extends React.Component {
       .check(x => x, "A site name is required")
 
     const usernameLink = Link.state(this, 'username')
-      .check(x => x, "A username is required")
+      .check(x => x, 'A username is required')
+
+
 
     const passwordLink = Link.state(this, 'password')
       .check(x => x, "A password is required")
 
     return (
-      <div className="row wizard-container mx-auto">
-        <div className="col-sm-12 ">
-          <p className="text-center">Please enter the information below to proceed</p>
-          <form className=" wizard-form " autoComplete="on">
-            <FormRowDB valueLink={dbNameLink} />
-            <FormRowPort valueLink={portLink} />
-            <FormRowSiteName valueLink={siteNameLink} />
-            <FormRowUserName valueLink={usernameLink} />
-            <FormRowPassword valueLink={passwordLink} />
-            <button
-              type="button" 
-              disabled={dbNameLink.error || portLink.error || siteNameLink.error || usernameLink.error || passwordLink.error} 
-              className="btn btn-primary wizard-btn"
-              onClick={this.handleSubmit}
-            >Submit
-            </button>
-          </form>
+      <div>
+        <ToastContainer />
+        <div className="row" align="center">
+          <div className="col-md-12 ">
+            <h1 className="wizard-header">CMS WIZARD</h1>
+          </div>
+        </div>
+        <div className="row wizard-container mx-auto">
+          <div className="col-sm-12 ">
+            <p className="text-center">Please enter the information below to proceed</p>
+            <form className=" wizard-form " autoComplete="on">
+              <FormRowDB valueLink={dbNameLink} />
+              <FormRowPort valueLink={portLink} />
+              <FormRowSiteName valueLink={siteNameLink} />
+              <FormRowUserName valueLink={usernameLink} onUsernameChange={this.onUsernameChange} valid={this.state.boolUsername} />
+              <FormRowPassword valueLink={passwordLink} />
+              <button
+                type="button"
+                disabled={dbNameLink.error || portLink.error || siteNameLink.error || usernameLink.error || passwordLink.error}
+                className="btn btn-primary wizard-btn"
+                onClick={this.handleSubmit}
+              >Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -90,26 +134,26 @@ class wizardForm extends React.Component {
 }
 
 wizardForm.propTypes = {
-  // companies: PropTypes.array,
   setupUser: PropTypes.func,
-  // history: PropTypes.object
+  checkDB: PropTypes.func
 }
 
 wizardForm.defaultProps = {
-  // companies: [],
   setupUser: () => { },
-  // history: null
+  checkDB: () => { }
 }
 
 function mapStateToProps(state) {
   return {
-    wizard: state.wizard.wizard
+    dbs: state.wizard.dbs,
+    userAdded: state.wizard.userAdded
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setupUser: (formData) => dispatch(setupUser(formData))
+    setupUser: (formData, history) => dispatch(setupUser(formData, history)),
+    checkDB: () => dispatch(checkDB())
   }
 }
 

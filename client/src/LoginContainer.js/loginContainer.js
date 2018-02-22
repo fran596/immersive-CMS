@@ -1,12 +1,8 @@
 import React from 'react'
-import { Link, Switch, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
-import WizardWelcome from './wizardWelcome'
-import WizardForm from './WizardForm/wizardForm'
-
-class WizardContainer extends React.Component {
+class loginContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +10,7 @@ class WizardContainer extends React.Component {
 
     render() {
         return (
-          <div>
+          <div className="container-fluid">
             <div className="row" align="center">
               <div className="col-md-12 ">
                 <h1 className="wizard-header">CMS WIZARD</h1>
@@ -43,13 +39,13 @@ class WizardContainer extends React.Component {
     }
 }
 
-WizardContainer.propTypes = {
+loginContainer.propTypes = {
     // contacts: PropTypes.array,
     // loadData: PropTypes.func,
     // history: PropTypes.object
 }
 
-WizardContainer.defaultProps = {
+loginContainer.defaultProps = {
     // contacts: [],
     // loadData: () => { },
     // history: null
@@ -71,4 +67,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(WizardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(loginContainer);

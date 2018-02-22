@@ -5,7 +5,7 @@ const formRowUsername = (props) => (
   <div className="form-group row">
     <label htmlFor="example-search-input" className="col-2 col-form-label font-weight-bold">Username</label>
     <div className="col-sm-6">
-      <input className="form-control" type="search" autoComplete="on" value={props.valueLink.value} onChange={e => props.valueLink.set( e.target.value)} />
+      <input className="form-control" type="search" autoComplete="on" value={props.valueLink.value} onChange={(e) => props.onUsernameChange( e, props.valueLink)} />
       <div className="error-placeholder">
         {props.valueLink.error || ''}
       </div>

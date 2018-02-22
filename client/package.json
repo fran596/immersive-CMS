@@ -14,18 +14,23 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap": "^4.0.0",
     "concurrently": "^3.5.1",
+    "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^2.30.1",
+    "jquery": "^3.3.1",
     "path": "^0.12.7",
+    "popper.js": "^1.12.9",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-toastify": "^3.3.4",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "url-loader": "^0.6.2",
     "valuelink": "^1.5.4",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
@@ -42,6 +47,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.9",
     "style-loader": "^0.19.1"
   }
 }

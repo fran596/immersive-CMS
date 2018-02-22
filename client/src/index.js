@@ -1,3 +1,8 @@
+import 'jquery'
+import 'popper.js'
+import 'bootstrap/dist/js/bootstrap';
+import  './Scripts/bsadmin'
+
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'; 
 import React from 'react'

@@ -5,11 +5,16 @@
     border: 1px solid rgb(185, 185, 185);
     border-radius: 10px;
     margin: 0px;
+    margin-bottom: 3rem;
 }
 
 /* .wizard-form {
     margin-bottom: 2rem;
 } */
+
+.wizard-header{
+    margin-bottom: 3rem;
+}
 
 .wizard-btn {
     margin-top: 2rem;

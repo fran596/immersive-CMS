@@ -2,8 +2,10 @@
 
 const DEFAULT_STATE = {
     users: [],
+    dbs: [],
     loading: false,
-    error: ''
+    error: '',
+    userAdded: false
 }
 
 const wizard = (state = DEFAULT_STATE, action) => {
@@ -16,9 +18,26 @@ const wizard = (state = DEFAULT_STATE, action) => {
         case 'SETUP_USER_SUCCESS':
             return {
                 ...state,
-                companies: [...state.companies, { ...action.company }]
+                users: [...state.users, { ...action.users }],
+                userAdded: true
             }
         case 'SETUP_USER_FAILURE':
+            return {
+                ...state,
+                error: action.error
+            }
+
+        case 'CHECK_DB_REQUEST':
+            return{
+                ...state,
+                loading: true
+            }
+        case 'CHECK_DB_SUCCESS':
+            return {
+                ...state,
+                dbs: action.dbs,
+            }
+        case 'CHECK_DB_FAILURE':
             return {
                 ...state,
                 error: action.error
