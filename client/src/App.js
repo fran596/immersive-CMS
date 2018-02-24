@@ -13,8 +13,10 @@ import WizardForm from './WizardContainer/WizardForm/wizardForm'
 
 
 import WizardRoute from './WizardContainer/wizardRoutes'
-import HomeRoute from './HomeContainer/homeRoutes'
+import HomeRoute from './HomeContainer/homeContainer'
 
+
+import addPageContainer from './HomeContainer/Page/AddPage/addPageContainer'
 
 const App = () => {
 

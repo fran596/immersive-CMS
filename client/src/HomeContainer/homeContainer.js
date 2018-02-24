@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import DashboardContainer from './dashboardContainer'
+import AddPageContainer from './Page/AddPage/addPageContainer'
 import HeaderContainer from '../HeaderContainer/headerContainer'
 import SideBarContainer from '../SideBarContainer/sideBarContainer'
 
@@ -12,6 +13,7 @@ const HomeContainer = () => (
       <SideBarContainer />
       <Switch>
         <Route path='/home' component={DashboardContainer} />
+        <Route path='/add' component={AddPageContainer} />
       </Switch>
     </div>
   </div>

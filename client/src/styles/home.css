@@ -55,6 +55,10 @@
     line-height: 1.2;
 }
 
+.inside-home{
+    margin-top: 24px;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         margin-left: -250px;

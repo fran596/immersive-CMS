@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, combineReducers  } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import ReduxThunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import { createLogger } from 'redux-logger'
 
 /*Reducer imports */
 import WizardReducer from './WizardContainer/wizardReducer'
+import PageReducer from './HomeContainer/Page/pageReducer'
 
 
 const logger = createLogger({
@@ -14,7 +16,9 @@ const logger = createLogger({
 })
 
 var reducer = combineReducers({
-    wizard: WizardReducer
+    wizard: WizardReducer,
+    form: formReducer,
+    page: PageReducer 
 })
 
 const store = createStore(reducer, composeWithDevTools(
