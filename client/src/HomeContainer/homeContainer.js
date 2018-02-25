@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import DashboardContainer from './dashboardContainer'
 import AddPageContainer from './Page/AddPage/addPageContainer'
+import ManagePageContainer from './Page/ManagePage/managePageContainer'
 import HeaderContainer from '../HeaderContainer/headerContainer'
 import SideBarContainer from '../SideBarContainer/sideBarContainer'
 
@@ -14,6 +15,7 @@ const HomeContainer = () => (
       <Switch>
         <Route path='/home' component={DashboardContainer} />
         <Route path='/add' component={AddPageContainer} />
+        <Route path='/manage' component={ManagePageContainer} />
       </Switch>
     </div>
   </div>

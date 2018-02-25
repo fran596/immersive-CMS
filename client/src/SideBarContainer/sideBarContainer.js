@@ -26,7 +26,7 @@ class SideBarContainer extends React.Component {
             <ul id="submenu1" className="list-unstyled collapse">
               {
                 this.props.pages.map(function (page) {
-                    return <li key={page._id}><Link to="/home">{page.title}</Link></li>
+                    return <li key={page._id}><Link to="/manage">{page.title}</Link></li>
             })}
  
             </ul>
