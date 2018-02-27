@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import {addPage} from './Actions/Creators/actionCreators'
 
@@ -34,7 +34,7 @@ class addPageContainer extends React.Component {
           <div className="container-fluid">
             <h3>Add Page</h3>
             <hr />
-            <div className="row wizard-container mx-auto inside-home">
+            <div className="row mx-auto inside-home card-form">
               <div className="col-sm-12">
                 <AddPageForm handleSubmit={this.handleSubmit}  />
               </div>

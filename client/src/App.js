@@ -2,8 +2,13 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
+
+
 import WizardStyles from './styles/wizard.css'
 import HomeStyles from './styles/home.css'
+import PageStyles from './styles/page.css'
+
+
 
 /*App containers */
 import LoginContainer from './LoginContainer.js/loginContainer'

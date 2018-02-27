@@ -1,0 +1,19 @@
+.manage-btn{
+    display: flex;
+    align-items: flex-end ;
+}
+
+.manage-margin{
+    margin-bottom: 3rem;
+}
+
+.card-form{
+    background-color: white;
+    box-shadow: 0.5px 0.5px 2px #888888;
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.draft-bg {
+    background-color: white;
+  }

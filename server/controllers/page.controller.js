@@ -25,7 +25,7 @@ function managePage(req, res) {
 
     Page.title = item.title;
     Page.url = item.url;
-    Page.sections = item.sections;
+    Page.content = item.content;
     
     Page.save(function(err, Pages){
       if(err){
@@ -57,7 +57,8 @@ function addPage(req, res){
   console.log(item)
   let newItem = new Page({
     title: item.title,
-    url: item.url
+    url: item.url,
+    content: ""
   })
   newItem.save((err, Pages) => {
     if(err){

@@ -59,6 +59,10 @@
     margin-top: 24px;
 }
 
+body{
+    background-color: whitesmoke
+}
+
 @media (max-width: 768px) {
     .sidebar {
         margin-left: -250px;

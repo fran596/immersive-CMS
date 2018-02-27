@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const validatedInputField = ({options, input, type, meta: { touched, error, warning }}, props) =>(
   <div>
-    <div>{options && <input className="form-control" {...input} type={type} value={options.defaultValue || ''} onChange={(ev)=>options.onTitleChange(ev,input.name)} /> }
+    <div>{options && <input className="form-control" {...input} type={type} value={options.defaultValue || ''} onChange={(ev)=>options.onInputChange(ev,input.name)} /> }
       {!options && <input className="form-control" {...input} type={type}  />}
     </div>
     {touched &&
@@ -19,13 +19,15 @@ validatedInputField.propTypes = {
     label: PropTypes.object,
     type: PropTypes.string,
     meta: PropTypes.object,
+    options: PropTypes.object
 }
 
 validatedInputField.defaultProps = {
     input: null,
     label: null,
     type: '',
-    meta: null
+    meta: null,
+    options: null
 }
 
 export default validatedInputField;
