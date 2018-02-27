@@ -20,6 +20,7 @@ import WizardForm from './WizardContainer/WizardForm/wizardForm'
 import WizardRoute from './WizardContainer/wizardRoutes'
 import HomeRoute from './HomeContainer/homeContainer'
 
+import TemplateView from './Templates/pageTemplateContainer'
 
 import addPageContainer from './HomeContainer/Page/AddPage/addPageContainer'
 
@@ -29,6 +30,7 @@ const App = () => {
       <div>
         <Switch>
           <Route exact path='/' component={LoginContainer} />
+          <Route exact path="/template" component={TemplateView} />
           <HomeRoute />    
           <WizardRoute />
         </Switch>
