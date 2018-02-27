@@ -26,11 +26,12 @@ export const addPage = (formData, history) => {
         toast.success("Page was added successfully",{
           position: toast.POSITION.TOP_RIGHT
         });
+
         /*Redirect user to home */
         history.push({
-          pathname: '/home',
+          pathname: '/manage',
           search: '',
-          state: {}
+          state: {page: data}
         })
         /*Dispatch action */
         dispatch({

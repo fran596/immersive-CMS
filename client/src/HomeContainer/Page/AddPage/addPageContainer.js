@@ -17,7 +17,6 @@ class addPageContainer extends React.Component {
 
 
     handleSubmit() {
-        
         let values = this.props.form.values;
         let errors = this.props.form.syncErrors;
         if(!errors){
@@ -33,7 +32,6 @@ class addPageContainer extends React.Component {
     render() {
         return (
           <div className="container-fluid">
-            <ToastContainer />
             <h3>Add Page</h3>
             <hr />
             <div className="row wizard-container mx-auto inside-home">

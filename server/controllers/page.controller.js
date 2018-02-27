@@ -17,7 +17,7 @@ function getAll(req, res) {
 function managePage(req, res) {
   console.log(req.body)
   let item = req.body
-  Page.findById(item.id,(err, Page)=>{
+  Page.findById(item._id,(err, Page)=>{
     if (err) {
       res.status(500)
       res.send(`Cannot find Page id ${err}`)
@@ -40,6 +40,7 @@ function managePage(req, res) {
 }
 
 function deletePage(req, res){
+  console.log(req.body.id)
   let id = mongoose.Types.ObjectId(req.body.id)
   Page.deleteOne({ "_id" : id }, (err, Pages) =>{
     if(err){

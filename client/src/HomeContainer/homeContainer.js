@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 import DashboardContainer from './dashboardContainer'
 import AddPageContainer from './Page/AddPage/addPageContainer'
@@ -12,6 +13,7 @@ const HomeContainer = () => (
     <HeaderContainer />
     <div className="d-flex align-items-stretch">
       <SideBarContainer />
+      <ToastContainer />
       <Switch>
         <Route path='/home' component={DashboardContainer} />
         <Route path='/add' component={AddPageContainer} />
