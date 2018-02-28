@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import validate from './managePagevalidation'
 
 /*Other container dependencies */
-import InputField from '../validatedInputField'
+import InputField from '../../../validatedInputField'
 
 
 const managePageForm = ({ title, url, onInputChange, onDeletePage}) => (

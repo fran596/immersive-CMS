@@ -2,6 +2,7 @@
 
 const DEFAULT_STATE = {
     pages: [],
+    activity: [],
     loading: false,
     error: ''
 }
@@ -16,7 +17,8 @@ const page = (state = DEFAULT_STATE, action) => {
         case 'ADD_PAGE_SUCCESS':
             return {
                 ...state,
-                pages: [...state.pages, { ...action.pages }]
+                pages: [...state.pages, { ...action.pages }],
+                activity:[`New page ${action.pages.title} was added`, ...state.activity]
             }
         case 'ADD_PAGE_FAILURE':
             return {
@@ -53,7 +55,8 @@ const page = (state = DEFAULT_STATE, action) => {
                         page = action.page
                     }
                     return page
-                })
+                }),
+                activity:[`Page ${action.page.title} was modified`, ...state.activity]
             }
         case 'MANAGE_PAGE_FAILURE':
             return {

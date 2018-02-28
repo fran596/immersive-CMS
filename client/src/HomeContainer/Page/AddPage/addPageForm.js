@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types'
 
 /*Other container dependencies */
-import InputField from '../validatedInputField'
+import InputField from '../../../validatedInputField'
 
 const validate = values => {
   const errors = {};
