@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 
 const userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  session: {type: String}
 })
 
 
@@ -19,6 +20,8 @@ userSchema.statics.authenticate = function (username, password, callback) {
         err.status = 401;
         return callback(err);
       }
+      console.log(user.password)
+      console.log(password)
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
           return callback(null, user);
@@ -30,16 +33,16 @@ userSchema.statics.authenticate = function (username, password, callback) {
 }
 
 //hashing a password before saving it to the database
-userSchema.pre('save', function (next) {
-  var user = this;
-  bcrypt.hash(user.password, 10, function (err, hash) {
-    if (err) {
-      return next(err);
-    }
-    user.password = hash;
-    next();
-  })
-});
+// userSchema.pre('save', function (next) {
+//   var user = this;
+//   bcrypt.hash(user.password, 10, function (err, hash) {
+//     if (err) {
+//       return next(err);
+//     }
+//     user.password = hash;
+//     next();
+//   })
+// });
 
 userSchema.plugin(timestamps)
 const User = mongoose.model("user", userSchema)

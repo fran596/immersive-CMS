@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
 
+import { ToastContainer, toast } from 'react-toastify';
 
 import WizardStyles from './styles/wizard.css'
 import HomeStyles from './styles/home.css'
@@ -18,6 +19,7 @@ import WizardForm from './WizardContainer/WizardForm/wizardForm'
 
 
 import WizardRoute from './WizardContainer/wizardRoutes'
+
 import HomeRoute from './HomeContainer/homeContainer'
 
 import TemplateView from './Templates/pageTemplateContainer'
@@ -28,11 +30,14 @@ const App = () => {
 
     return (
       <div>
+        <ToastContainer />
         <Switch>
           <Route exact path='/' component={LoginContainer} />
           <Route exact path="/template" component={TemplateView} />
-          {/* <HomeRoute />     */}
-          <WizardRoute />
+          <Route path='/welcome' component={WizardWelcome} />
+          <Route path='/setup' component={WizardForm} />
+          <HomeRoute />    
+          {/* <WizardRoute /> */}
         </Switch>
       </div>
     );

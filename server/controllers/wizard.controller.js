@@ -1,6 +1,8 @@
 const User = require('../models/User')
 const mongoose = require('mongoose');
+const uuidv1 = require('uuid/v1');
 const Admin = mongoose.mongo.Admin;
+const bcrypt = require('bcryptjs')
 
 function setUp(req, res) {
   let database = req.body.db;
@@ -13,19 +15,32 @@ function setUp(req, res) {
 
   /*Set enviroment database variable */
   var fs = require('fs');
-  fs.writeFile(".env", `DB=mongodb://localhost:${port}/${database}`, function (err) {
+  fs.writeFile(".env", `DB=mongodb://localhost:${port}/${database}\nKEY=${uuidv1()}`, function (err) {
     if (err) {
       return console.log(err);
     }
-
     console.log("The file was saved!");
   });
 
   /*Create DB */
   mongoose.connect(`mongodb://localhost:${port}/${database}`);
+ 
+  let hashPassword = ''
+
+  /*Hash password */
+  bcrypt.hash(password, 10, function (err, hash) {
+    if (err) {
+      console.log(error)
+      res.status(400)
+      res.json(err)
+     // return next(err);
+    }
+    // hashPassword = hash;
+    // console.log(`hashPass: ${hashPassword}`)
+    /*Create user */
   let newUser = new User({
     username: username,
-    password: password
+    password: hash
   })
 
   /*Insert user in Users collection */
@@ -37,6 +52,9 @@ function setUp(req, res) {
     res.status(200);
     res.json(todos)
   })
+  })
+
+  
 
 }
 

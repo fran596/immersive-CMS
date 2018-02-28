@@ -53,12 +53,16 @@ export const authUser = (user, history) => {
   }
 }
 
-export const checkAuth = () => {
+export const checkAuth = (session) => {
   return function (dispatch) {
     dispatch({
       type: CHECK_AUTH_REQUEST
     })
-    fetch(`${API_URL}/checkAuth`)
+    fetch(`${API_URL}/checkAuth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(session),
+    })
       .then(response => response.json())
       .then(data => {
         dispatch({

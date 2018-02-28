@@ -23,12 +23,12 @@ export const setupUser = (formData, history) => {
       .then(response => response.json())
       .then(data => {
         /*Notification toast */
-        toast.success("User added",{
+        toast.success("Installation completed",{
           position: toast.POSITION.TOP_RIGHT
         });
-        /*Redirect user to home */
+        /*Redirect user to login */
         history.push({
-          pathname: '/home',
+          pathname: '/',
           search: '',
           state: {}
         })
@@ -40,7 +40,7 @@ export const setupUser = (formData, history) => {
       })
       .catch(error => {
          /*Notification toast */
-        toast.error("User could not be added",{
+        toast.error("Installation failed",{
           position: toast.POSITION.TOP_RIGHT
         });
         /*Dispatch action */

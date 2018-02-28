@@ -23,7 +23,7 @@ class pageTemplateContainer extends React.Component {
           <div className="container-fluid">
             {
                 this.props.pages.map(function(page){
-                   return <PageTemplate content={page.content} />
+                   return <PageTemplate content={page.content} title={page.title} />
                 })
             }
           </div>
