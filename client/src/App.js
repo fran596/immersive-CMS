@@ -31,7 +31,7 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={LoginContainer} />
           <Route exact path="/template" component={TemplateView} />
-          <HomeRoute />    
+          {/* <HomeRoute />     */}
           <WizardRoute />
         </Switch>
       </div>

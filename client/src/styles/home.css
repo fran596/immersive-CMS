@@ -63,6 +63,14 @@ body{
     background-color: whitesmoke
 }
 
+.margin-login{
+    margin-top: 4rem;
+}
+
+.btn-login{
+    margin-top: 1rem;
+}
+
 @media (max-width: 768px) {
     .sidebar {
         margin-left: -250px;

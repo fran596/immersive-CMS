@@ -2,36 +2,52 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify';
+
+/*actions */
+import {authUser} from '../User/Actions/Creators/actionCreators'
+
+import LogInForm from './loginForm'
+
 class loginContainer extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handleSubmit() {
+      
+      let values = this.props.form.values;
+      console.log(values)
+      let errors = this.props.form.syncErrors;
+      if(!errors){
+        
+          this.props.authUser(values, this.props.history)
+      }
+      else{
+        if(typeof values === 'undefined'){
+          toast.error("Please complete this form",{
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
+        else{
+          toast.error("Please correct the errors on this form",{
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
+        
+          
+      }
+  }
 
     render() {
         return (
-          <div className="container-fluid">
-            <div className="row" align="center">
+          <div className="container-fluid margin-login">
+            <ToastContainer />
+            <div className="row wizard-container mx-auto" >
               <div className="col-md-12 ">
-                <h1 className="wizard-header">CMS WIZARD</h1>
-              </div>
-            </div>
-            <div className="row wizard-container mx-auto">
-              <div className="col-md-12">
-                <form className="form-signin">
-                  <h2 className="form-signin-heading">Please sign in</h2>
-                  <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                  <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
-                  <label htmlFor="inputPassword" className="sr-only">Password</label>
-                  <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox" value="remember-me" /> Remember me
-                    </label>
-                  </div>
-                  <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                  <p><Link to="/welcome" >Don't have an account? Sign up here </Link></p>
-                </form>
+                <LogInForm handleSubmit={this.handleSubmit} />
               </div>
             </div>
           </div>
@@ -41,24 +57,31 @@ class loginContainer extends React.Component {
 
 loginContainer.propTypes = {
     // contacts: PropTypes.array,
-    // loadData: PropTypes.func,
+    authUser: PropTypes.func,
     // history: PropTypes.object
+    form: PropTypes.object,
+    history: PropTypes.object
 }
 
 loginContainer.defaultProps = {
     // contacts: [],
-    // loadData: () => { },
+    authUser: () => { },
     // history: null
+    form: null,
+    history: null
 }
 
 function mapStateToProps(state) {
     return {
-        wizard: state.wizard.wizard
+        wizard: state.wizard.wizard,
+        user: state.user,
+        form: state.form.login,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
+      authUser: (user, history) => dispatch(authUser(user, history))
         // loadData: () => {
         //     dispatch(fetchContact())
         // }

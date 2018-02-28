@@ -4,41 +4,47 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const session = require('express-session');
+const app = express()
 
 /*route controllers */
 const wizardRoutes = require('./routes/wizard')
 const pagesRoutes = require('./routes/pages')
+const userRoutes = require('./routes/users')
 
-// const todosRoutes = require('./routes/todos')
-const app = express()
 
 app.use(cors())
 app.use(morgan('tiny'))
 app.use(bodyParser.json())
 
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  maxAge: 60000 * 15
+}));
+
 if (process.env.DB == null){
+  //DB not created yet
   mongoose.connect(`mongodb://localhost:27017`);
-  console.log('esta vacio')
 }
 else{
+  //DB created
   mongoose.connect(process.env.DB)
-  console.log('no vacio')
 }
 
 app.set('port', process.env.PORT || 8081)
 
 
 
-// app.get('/', (req, res) => {
-//   res.send('TODO API HOME PAGE 💩')
-// })
-
 /*API routes */
 app.use('/api/wizard', wizardRoutes);
 app.use('/api/pages', pagesRoutes);
+app.use('/api/users', userRoutes);
 
 app.listen(app.get('port'), err => {
-  if (err) return console.log(`something bad happened 💩 ${err}`)
+  if (err) return console.log(`something bad happened ${err}`)
   console.log(`server listening on ${app.get('port')}`)
 })
 

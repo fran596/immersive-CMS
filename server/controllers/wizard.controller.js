@@ -23,8 +23,6 @@ function setUp(req, res) {
 
   /*Create DB */
   mongoose.connect(`mongodb://localhost:${port}/${database}`);
-  // console.log(process.env.DB)
-  // mongoose.connect(process.env.DB);
   let newUser = new User({
     username: username,
     password: password
@@ -43,9 +41,6 @@ function setUp(req, res) {
 }
 
 function searchDB(req, res) {
-  
-  // mongoose.connect(`mongodb://localhost:27017`);
-
   new Admin(mongoose.connection.db).listDatabases(function (err, result) {
     if (err) {
       res.status(500)
