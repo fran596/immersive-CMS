@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
+import 'antd/dist/antd.css';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -32,15 +33,14 @@ const App = () => {
       <div>
         <ToastContainer />
         <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={LoginContainer} />
-          <Route exact path="/template" component={TemplateView} />
-          <Route path='/welcome' component={WizardWelcome} />
-          <Route path='/setup' component={WizardForm} />
-          {/* <PrivateRoute path="/home" component={HomeRoute} /> */}
-          <HomeRoute />    
-          {/* <WizardRoute /> */}
-        </Switch>
+          <Switch>
+            <Route exact path='/' component={LoginContainer} />
+            <Route path="/template" component={TemplateView} />
+            <Route path='/welcome' component={WizardWelcome} />
+            <Route path='/setup' component={WizardForm} />
+            <HomeRoute />    
+            <WizardRoute />
+          </Switch>
         </BrowserRouter>
       </div>
     );

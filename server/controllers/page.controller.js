@@ -26,6 +26,8 @@ function managePage(req, res) {
     Page.title = item.title;
     Page.url = item.url;
     Page.content = item.content;
+    // Page.home = item.home
+    Page.home = false
     
     Page.save(function(err, Pages){
       if(err){

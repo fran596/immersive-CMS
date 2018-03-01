@@ -11,6 +11,7 @@ class HeaderContainer extends React.Component {
   constructor(props) {
     super(props);
     this.onLogout = this.onLogout.bind(this)
+    this.onLogoClick = this.onLogoClick.bind(this)
   }
 
   componentWillMount() {
@@ -24,11 +25,15 @@ class HeaderContainer extends React.Component {
     this.props.logout(this.props.history, session)
   }
 
+  onLogoClick(){
+    document.getElementById('sidebar-fixed').classList.toggle('toggled')
+  }
+
   render(){
     return (
       this.props.user.loading &&
-      <nav className="navbar navbar-expand navbar-dark bg-primary">
-        <a className="sidebar-toggle text-light mr-3"><i className="fa fa-bars" /></a>
+      <nav className="navbar navbar-expand navbar-dark bg-primary" id="header">
+        <a onClick={this.onLogoClick} className="sidebar-toggle text-light mr-3"><i className="fa fa-bars" /></a>
         <a className="navbar-brand" href="#"><i className="fa fa-code-branch" /> Navbar</a>
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav ml-auto">

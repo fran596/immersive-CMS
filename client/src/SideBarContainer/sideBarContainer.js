@@ -9,16 +9,21 @@ class SideBarContainer extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.onLogoClick = this.onLogoClick.bind(this)
   }
   componentWillMount() {
     this.props.getPages()
   }
 
+  onLogoClick(ev){
+    console.log(ev.target.parentElement)
+   // ev.target.parentElement.classList.toggle('toggled')
+  }
+
   render() {
     return (
       this.props.user.loading &&
-      <div className="sidebar bg-dark">
+      <div id="sidebar-fixed" className="sidebar bg-dark">
         <ul className="list-unstyled">
           <li><Link to="/home"><i className="fa fa-fw fa-tachometer" /> Dashboard</Link></li>
           <li><Link to="/add"><i className="fa fa-fw fa-plus" /> Add Pages</Link></li>

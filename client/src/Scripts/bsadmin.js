@@ -3,6 +3,7 @@ import $ from 'jquery'
 $(document).ready(function () {
     // toggle sidebar when button clicked
     $('.sidebar-toggle').on('click', function () {
+        window.alert('click')
         $('.sidebar').toggleClass('toggled');
     });
 

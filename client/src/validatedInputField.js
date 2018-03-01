@@ -1,10 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Input } from 'antd';
 
 const validatedInputField = ({options, input, type, meta: { touched, error, warning }}, props) =>(
   <div>
-    <div>{options && <input className="form-control" {...input} type={type} value={options.defaultValue || ''} onChange={(ev)=>options.onInputChange(ev,input.name)} /> }
-      {!options && <input className="form-control" {...input} type={type}  />}
+    <div>
+      {options && 
+      <Input 
+        className="form-control" 
+        {...input}
+        type={type} 
+        value={options.defaultValue || ''} 
+        onChange={(ev)=>options.onInputChange(ev,input.name)}
+      /> }
+      {!options && <Input className="form-control" {...input} type={type}  />}
     </div>
     {touched &&
         error &&

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import {getPages} from '../HomeContainer/Page/AddPage/Actions/Creators/actionCreators'
 
 import PageTemplate from './pageTemplate'
+import PageTemplateHeader from './pageTemplateHeader'
 
 class pageTemplateContainer extends React.Component {
 
@@ -20,12 +21,45 @@ class pageTemplateContainer extends React.Component {
 
     render() {
         return (
-          <div className="container-fluid">
-            {
-                this.props.pages.map(function(page){
-                   return <PageTemplate content={page.content} title={page.title} />
-                })
+          <div>
+            <PageTemplateHeader pages={this.props.pages} />
+            <div className="container-fluid">
+              {
+                <Switch>
+                    {this.props.pages.map(function(page){
+                 return (
+                     page.home === true
+                     ? <Route 
+                       exact
+                       path="/template" 
+                       key={page._id} 
+                       render={() => {
+                        return (
+                          <PageTemplate 
+                            content={page.content} 
+                            title={page.title}
+                          />)
+                        }
+                    }
+                     />
+                   :<Route 
+                     exact
+                     path={'/template'+page.url} 
+                     key={page._id} 
+                     render={() => {
+                        return (
+                          <PageTemplate 
+                            content={page.content} 
+                            title={page.title}
+                          />)
+                        }
+                    }
+                   />
+                )
+                })}
+                  </Switch>
             }
+            </div>
           </div>
         );
     }
