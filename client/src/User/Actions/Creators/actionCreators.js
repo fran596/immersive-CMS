@@ -54,22 +54,27 @@ export const authUser = (user, history) => {
   }
 }
 
-export const checkAuth = (session) => {
+export const checkAuth = () => {
   return function (dispatch) {
     dispatch({
       type: CHECK_AUTH_REQUEST
     })
-    fetch(`${API_URL}/checkAuth`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(session),
-    })
+    fetch(`${API_URL}/getUser`)
       .then(response => response.json())
       .then(data => {
-        dispatch({
-          type: CHECK_AUTH_SUCCESS,
-          valid: data
+        fetch(`${API_URL}/checkAuth`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session: data.session }),
         })
+          .then(response => response.json())
+          .then(data => {
+            dispatch({
+              type: CHECK_AUTH_SUCCESS,
+              valid: data
+            })
+          })
+        //window.alert(JSON.stringify(data, null, 4))
       })
       .catch(error => {
         dispatch({

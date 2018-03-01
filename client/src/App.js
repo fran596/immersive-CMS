@@ -9,7 +9,7 @@ import WizardStyles from './styles/wizard.css'
 import HomeStyles from './styles/home.css'
 import PageStyles from './styles/page.css'
 
-
+import PrivateRoute from './privateRoute'
 
 /*App containers */
 import LoginContainer from './LoginContainer.js/loginContainer'

@@ -15,13 +15,14 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'AUTH_USER_REQUEST':
             return {
                 ...state,
-                loading: true
+                // loading: true
             }
         case 'AUTH_USER_SUCCESS':
             return {
                 ...state,
                 session: action.data,
-                login: true
+                login: true,
+                isValid: true
             }
         case 'AUTH_USER_FAILURE':
             return {
@@ -31,12 +32,13 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'CHECK_AUTH_REQUEST':
             return {
                 ...state,
-                loading: true
+                loading: false
             }
 
         case 'CHECK_AUTH_SUCCESS':
             return {
                 ...state,
+                loading: true,
                 isValid: action.valid
             }
 
@@ -48,7 +50,7 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'LOGOUT_REQUEST':
             return {
                 ...state,
-                loading: true
+                // loading: false
             }
         case 'LOGOUT_SUCCESS':
             return {
@@ -63,7 +65,7 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'GET_USER_REQUEST':
             return {
                 ...state,
-                loading: true
+                // loading: false
             }
         case 'GET_USER_SUCCESS':
             return {

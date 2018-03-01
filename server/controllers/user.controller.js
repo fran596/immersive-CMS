@@ -47,22 +47,27 @@ function authUser(req, res, next) {
 
 // GET route after registering
 function checkAuth(req, res, next) {
-
+  //console.log(`session: ${req.body.session}`)
   User.findOne({ session: req.body.session })
     .exec(function (err, user) {
-      console.log(user)
-      jwt.verify(user.session, process.env.KEY, function (err, decoded) {
-        if (err) {
-          console.log(err)
-          res.status(400);
-          res.send(false)
-        } else {
-          res.status(200);
-          res.send(true)
-        }
-      })
+      if(err || !user){
+        res.status(404)
+        res.json(false)
+      }
+      else{
+        jwt.verify(user.session, process.env.KEY, function (err, decoded) {
+          if (err) {
+            console.log(err)
+            res.status(400);
+            res.send(false)
+          } else {
+            res.status(200);
+            res.send(true)
+          }
+        })
+      }
+      
     })
-
 };
 
 // GET for logout logout

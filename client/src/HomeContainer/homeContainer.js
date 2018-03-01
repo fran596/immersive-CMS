@@ -2,6 +2,8 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
+import PrivateRoute from '../privateRoute'
+
 import DashboardContainer from './dashboardContainer'
 import AddPageContainer from './Page/AddPage/addPageContainer'
 import ManagePageContainer from './Page/ManagePage/managePageContainer'
@@ -15,9 +17,9 @@ const HomeContainer = () => (
       <SideBarContainer />
       <ToastContainer />
       <Switch>
-        <Route path='/home' component={DashboardContainer} />
-        <Route path='/add' component={AddPageContainer} />
-        <Route path='/manage' component={ManagePageContainer} />
+        <PrivateRoute path='/home' component={DashboardContainer} />
+        <PrivateRoute path='/add' component={AddPageContainer} />
+        <PrivateRoute path='/manage' component={ManagePageContainer} />
       </Switch>
     </div>
   </div>
