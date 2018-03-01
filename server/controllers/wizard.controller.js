@@ -33,11 +33,7 @@ function setUp(req, res) {
       console.log(error)
       res.status(400)
       res.json(err)
-     // return next(err);
     }
-    // hashPassword = hash;
-    // console.log(`hashPass: ${hashPassword}`)
-    /*Create user */
   let newUser = new User({
     username: username,
     password: hash

@@ -54,6 +54,9 @@ const page = (state = DEFAULT_STATE, action) => {
                     if (page._id === action.page._id) {
                         page = action.page
                     }
+                    else{
+                        page.home = false;
+                    }
                     return page
                 }),
                 activity:[`Page ${action.page.title} was modified`, ...state.activity]

@@ -17,11 +17,11 @@ class dashboardContainer extends React.Component {
           <h1>Recent activity</h1>
           {
             this.props.activity.map(function(item){
-              console.log(cont)
+              ++cont;
               if(cont <= 2){
                 return <p key={cont}>{item}</p>
               }
-              ++cont;
+              
             })
           }
         </div>

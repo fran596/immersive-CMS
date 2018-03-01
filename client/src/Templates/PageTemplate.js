@@ -7,17 +7,6 @@ import { Menu } from 'antd';
 
 const pageTemplate = (props) => (
   <div>
-    {/* <Menu
-      theme="dark"
-      mode="horizontal"
-    >
-      <Menu.Item key="mail">
-        <Link to="/template" >
-        Home
-        </Link>
-      </Menu.Item>
-
-    </Menu> */}
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12 " />

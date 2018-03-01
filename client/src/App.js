@@ -39,7 +39,7 @@ const App = () => {
             <Route path='/welcome' component={WizardWelcome} />
             <Route path='/setup' component={WizardForm} />
             <HomeRoute />    
-            <WizardRoute />
+            {/* <WizardRoute /> */}
           </Switch>
         </BrowserRouter>
       </div>
