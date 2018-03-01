@@ -1,21 +1,33 @@
 import { Link } from 'react-router-dom'
+import { Card, Button, Icon } from 'antd';
 import React from 'react'
 
 const wizardWelcome = () => (
   <div>
-    <div className="row" align="center">
+    <div className="row center" >
       <div className="col-md-12 ">
-        <h1 className="wizard-header">CMS WIZARD</h1>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-md-12">
-        <p>Welcome to the CMS wizard</p>
-        <p>For starters, you will need the following to create a CMS:</p>
-        <div className="btn btn-success"><Link to="/setup">Next</Link></div>
+        <Card
+          title="CMS WIZARD" 
+          extra={<Link to="/setup"> <Button type="primary"> Next<Icon type="right" /> </Button>  </Link>}
+        >
+          <p>Welcome to the CMS wizard</p>
+          <p>For starters, you will need the following to create a CMS:</p>
+          <ul>
+            <li>NodeJS</li>
+            <li>NPM or Yarn</li>
+            <li>MongoDB</li>
+          </ul>
+        </Card>
       </div>
     </div>
   </div>
+  
 )
+
+
+
+         
+
+         
 
 export default wizardWelcome;

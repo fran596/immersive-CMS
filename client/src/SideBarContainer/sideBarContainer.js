@@ -23,7 +23,7 @@ class SideBarContainer extends React.Component {
   render() {
     return (
       this.props.user.loading &&
-      <div id="sidebar-fixed" className="sidebar bg-dark">
+      <div id="sidebar-fixed" className="sidebar sidebar-bg">
         <ul className="list-unstyled">
           <li><Link to="/home"><i className="fa fa-fw fa-tachometer" /> Dashboard</Link></li>
           <li><Link to="/add"><i className="fa fa-fw fa-plus" /> Add Pages</Link></li>
@@ -47,6 +47,7 @@ class SideBarContainer extends React.Component {
  
             </ul>
           </li>
+          <li><Link to="/template"><i className="fa fa-fw fa-eye" /> Page Preview</Link></li>
         </ul>
       </div>
     );

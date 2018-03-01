@@ -23,10 +23,10 @@ class pageTemplateContainer extends React.Component {
         return (
           <div>
             <PageTemplateHeader pages={this.props.pages} />
-            <div className="container-fluid">
+            <div id="template-body" className="container-fluid">
               {
                 <Switch>
-                    {this.props.pages.map(function(page){
+                  {this.props.pages.map(function(page){
                  return (
                      page.home === true
                      ? <Route 
@@ -57,7 +57,7 @@ class pageTemplateContainer extends React.Component {
                    />
                 )
                 })}
-                  </Switch>
+                </Switch>
             }
             </div>
           </div>

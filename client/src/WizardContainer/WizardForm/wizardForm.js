@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { ToastContainer } from 'react-toastify';
 import { setupUser, checkDB } from '../Actions/Creators/actionCreators'
+import { Card } from 'antd';
 
 /*Form containers */
 import FormRowDB from './formRowDB'
@@ -104,13 +105,10 @@ class wizardForm extends React.Component {
     return (
       <div>
         <ToastContainer />
-        <div className="row" align="center">
-          <div className="col-md-12 ">
-            <h1 className="wizard-header">CMS WIZARD</h1>
-          </div>
-        </div>
-        <div className="row wizard-container mx-auto">
-          <div className="col-sm-12 ">
+  
+        <div className="row  mx-auto">
+          <div className="col-sm-12 center ">
+          <Card title="CMS WIZARD SETUP">
             <p className="text-center">Please enter the information below to proceed</p>
             <form className=" wizard-form " autoComplete="on">
               <FormRowDB valueLink={dbNameLink} />
@@ -126,6 +124,7 @@ class wizardForm extends React.Component {
               >Submit
               </button>
             </form>
+            </Card>
           </div>
         </div>
       </div>

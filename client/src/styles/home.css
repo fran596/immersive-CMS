@@ -59,9 +59,6 @@
     margin-top: 24px;
 }
 
-body{
-    background-color: whitesmoke
-}
 
 .margin-login{
     margin-top: 4rem;
@@ -70,6 +67,19 @@ body{
 .btn-login{
     margin-top: 1rem;
 }
+
+.nav-bg{
+    background-color: rgb(36, 95, 172);
+}
+
+.sidebar-bg{
+    background-color: rgb(36, 36, 43);
+}
+.center {
+    padding: 3rem;
+}
+
+
 
 @media (max-width: 768px) {
     .sidebar {

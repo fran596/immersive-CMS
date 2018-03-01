@@ -12,6 +12,10 @@ import InputField from '../../../validatedInputField'
 const managePageForm = ({ title, url, home, onInputChange, onDeletePage, onSelectChange}) => (
   <div>
     <div className="row mx-auto">
+    <label htmlFor="select" className="font-weight-bold  ">Home page</label>
+    </div>
+    <div className="row mx-auto">
+    
       <Select value={home} style={{ width: 120 }} onChange={onSelectChange}>
         <Select.Option value="true">Yes</Select.Option>
         <Select.Option value="false">No</Select.Option>

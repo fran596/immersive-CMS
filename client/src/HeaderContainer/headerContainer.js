@@ -32,7 +32,7 @@ class HeaderContainer extends React.Component {
   render(){
     return (
       this.props.user.loading &&
-      <nav className="navbar navbar-expand navbar-dark bg-primary" id="header">
+      <nav className="navbar navbar-expand navbar-dark nav-bg" id="header">
         <a onClick={this.onLogoClick} className="sidebar-toggle text-light mr-3"><i className="fa fa-bars" /></a>
         <a className="navbar-brand" href="#"><i className="fa fa-code-branch" /> Navbar</a>
         <div className="navbar-collapse collapse">
