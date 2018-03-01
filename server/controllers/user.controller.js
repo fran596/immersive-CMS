@@ -69,6 +69,7 @@ function checkAuth(req, res, next) {
 function logout(req, res, next) {
   User.findOne({ session: req.body.session })
     .exec(function (err, user) {
+      console.log(user)
       user.session = '';
       user.save(function (err, Pages) {
         if (err) {
@@ -83,8 +84,22 @@ function logout(req, res, next) {
     })
 };
 
+
+function getUser(req, res) {
+  User.find()
+    .exec((err, Users) => {
+      if (err) {
+        res.status(500)
+        res.send(`Ocurrió un error 💩 ${err}`)
+      }
+      res.status(200)
+      res.json(Users[0])
+    })
+}
+
 module.exports = {
   authUser,
   checkAuth,
-  logout
+  logout,
+  getUser
 }

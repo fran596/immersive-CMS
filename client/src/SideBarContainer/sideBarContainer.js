@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import {getPages} from '../HomeContainer/Page/AddPage/Actions/Creators/actionCreators'
 
@@ -73,5 +73,5 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideBarContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideBarContainer));
 

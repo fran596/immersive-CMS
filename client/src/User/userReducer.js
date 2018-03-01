@@ -1,7 +1,9 @@
 // user reducer
 
 const DEFAULT_STATE = {
-    session: {},
+    session: '',
+    user: {},
+    username: '',
     isValid: false,
     login: false,
     loading: false,
@@ -54,6 +56,24 @@ const user = (state = DEFAULT_STATE, action) => {
                 login: false
             }
         case 'LOGOUT_FAILURE':
+            return {
+                ...state,
+                error: action.error
+            }
+        case 'GET_USER_REQUEST':
+            return {
+                ...state,
+                loading: true
+            }
+        case 'GET_USER_SUCCESS':
+            return {
+                ...state,
+                user: action.user,
+                username: action.user.username,
+                session: action.user.session
+
+            }
+        case 'GET_USER_FAILURE':
             return {
                 ...state,
                 error: action.error

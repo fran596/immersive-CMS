@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger'
 /*Reducer imports */
 import WizardReducer from './WizardContainer/wizardReducer'
 import PageReducer from './HomeContainer/Page/pageReducer'
+import UserReducer from './User/userReducer'
 
 
 const logger = createLogger({
@@ -18,7 +19,8 @@ const logger = createLogger({
 var reducer = combineReducers({
     wizard: WizardReducer,
     form: formReducer,
-    page: PageReducer 
+    page: PageReducer,
+    user: UserReducer 
 })
 
 const store = createStore(reducer, composeWithDevTools(

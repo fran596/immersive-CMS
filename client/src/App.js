@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
 
@@ -31,6 +31,7 @@ const App = () => {
     return (
       <div>
         <ToastContainer />
+        <BrowserRouter>
         <Switch>
           <Route exact path='/' component={LoginContainer} />
           <Route exact path="/template" component={TemplateView} />
@@ -39,6 +40,7 @@ const App = () => {
           <HomeRoute />    
           {/* <WizardRoute /> */}
         </Switch>
+        </BrowserRouter>
       </div>
     );
 }

@@ -2,9 +2,10 @@ import { toast } from 'react-toastify';
 
 /*Action types */
 import {
-    AUTH_USER_REQUEST, AUTH_USER_SUCCESS, AUTH_USER_FAILURE,
-    CHECK_AUTH_REQUEST, CHECK_AUTH_SUCCESS, CHECK_AUTH_FAILURE,
-    LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE
+  AUTH_USER_REQUEST, AUTH_USER_SUCCESS, AUTH_USER_FAILURE,
+  CHECK_AUTH_REQUEST, CHECK_AUTH_SUCCESS, CHECK_AUTH_FAILURE,
+  LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE,
+  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE
 } from '../Types/actionTypes'
 
 
@@ -30,9 +31,9 @@ export const authUser = (user, history) => {
           state: {}
         })
         /*Notification toast */
-        toast.success(`Welcome ${user.username}`,{
-            position: toast.POSITION.TOP_RIGHT
-          });
+        toast.success(`Welcome ${user.username}`, {
+          position: toast.POSITION.TOP_RIGHT
+        });
         /*Dispatch action */
         dispatch({
           type: AUTH_USER_SUCCESS,
@@ -40,8 +41,8 @@ export const authUser = (user, history) => {
         })
       })
       .catch(error => {
-         /*Notification toast */
-        toast.error("Please check your username and password",{
+        /*Notification toast */
+        toast.error("Please check your username and password", {
           position: toast.POSITION.TOP_RIGHT
         });
         /*Dispatch action */
@@ -80,30 +81,56 @@ export const checkAuth = (session) => {
 }
 
 
-export const logout = (history) => {
-    return function (dispatch) {
-      dispatch({
-        type: LOGOUT_REQUEST
-      })
-      fetch(`${API_URL}`)
-        .then(response => response.json())
-        .then(data => {
+export const logout = (history, session) => {
+  return function (dispatch) {
+    dispatch({
+      type: LOGOUT_REQUEST
+    })
+    fetch(`${API_URL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(session),
+    })
+      .then(response => response.json())
+      .then(data => {
         /*Redirect user to login */
         history.push({
-            pathname: '/',
-            search: '',
-            state: {}
-          })
-          dispatch({
-            type: LOGOUT_SUCCESS,
-            pages: data
-          })
+          pathname: '/',
+          search: '',
+          state: {}
         })
-        .catch(error => {
-          dispatch({
-            type: LOGOUT_FAILURE,
-            error: error
-          })
+        dispatch({
+          type: LOGOUT_SUCCESS,
+          login: data
         })
-    }
+      })
+      .catch(error => {
+        dispatch({
+          type: LOGOUT_FAILURE,
+          error: error
+        })
+      })
   }
+}
+
+export const getUser = () => {
+  return function (dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST
+    })
+    fetch(`${API_URL}/getUser`)
+      .then(response => response.json())
+      .then(data => {
+        dispatch({
+          type: GET_USER_SUCCESS,
+          user: data
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_USER_FAILURE,
+          error: error
+        })
+      })
+  }
+}
