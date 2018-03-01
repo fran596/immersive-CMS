@@ -37,6 +37,7 @@ const App = () => {
           <Route exact path="/template" component={TemplateView} />
           <Route path='/welcome' component={WizardWelcome} />
           <Route path='/setup' component={WizardForm} />
+          {/* <PrivateRoute path="/home" component={HomeRoute} /> */}
           <HomeRoute />    
           {/* <WizardRoute /> */}
         </Switch>

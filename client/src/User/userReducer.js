@@ -15,14 +15,15 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'AUTH_USER_REQUEST':
             return {
                 ...state,
-                // loading: true
+                 loading: false
             }
         case 'AUTH_USER_SUCCESS':
             return {
                 ...state,
                 session: action.data,
                 login: true,
-                isValid: true
+                isValid: true,
+                loading: true
             }
         case 'AUTH_USER_FAILURE':
             return {
@@ -55,7 +56,8 @@ const user = (state = DEFAULT_STATE, action) => {
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,
-                login: false
+                login: false,
+                logout:false
             }
         case 'LOGOUT_FAILURE':
             return {

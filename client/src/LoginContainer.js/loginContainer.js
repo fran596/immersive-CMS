@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 /*actions */
 import {authUser} from '../User/Actions/Creators/actionCreators'
 
+/*other containers */
 import LogInForm from './loginForm'
 
 class loginContainer extends React.Component {
@@ -17,9 +18,7 @@ class loginContainer extends React.Component {
     }
 
     handleSubmit() {
-      
       let values = this.props.form.values;
-      console.log(values)
       let errors = this.props.form.syncErrors;
       if(!errors){
         
@@ -35,9 +34,7 @@ class loginContainer extends React.Component {
           toast.error("Please correct the errors on this form",{
             position: toast.POSITION.TOP_RIGHT
           });
-        }
-        
-          
+        } 
       }
   }
 

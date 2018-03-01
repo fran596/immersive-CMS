@@ -17,7 +17,7 @@ const HomeContainer = () => (
       <SideBarContainer />
       <ToastContainer />
       <Switch>
-        <PrivateRoute path='/home' component={DashboardContainer} />
+        <PrivateRoute exact path='/home' component={DashboardContainer} />
         <PrivateRoute path='/add' component={AddPageContainer} />
         <PrivateRoute path='/manage' component={ManagePageContainer} />
       </Switch>
