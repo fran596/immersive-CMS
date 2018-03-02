@@ -31,7 +31,7 @@ class addPageContainer extends React.Component {
 
     render() {
         return (
-          <div className="container-fluid">
+          <div className="container-fluid home-container">
             <h3>Add Page</h3>
             <hr />
             <div className="row mx-auto inside-home card-form">

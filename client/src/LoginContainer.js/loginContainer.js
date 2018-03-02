@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { toast, ToastContainer } from 'react-toastify';
+import { Card } from 'antd';
 
 /*actions */
 import {authUser} from '../User/Actions/Creators/actionCreators'
@@ -42,9 +43,11 @@ class loginContainer extends React.Component {
         return (
           <div className="container-fluid margin-login">
             <ToastContainer />
-            <div className="row wizard-container mx-auto" >
-              <div className="col-md-12 ">
-                <LogInForm handleSubmit={this.handleSubmit} />
+            <div className="row mx-auto" >
+              <div className="col-md-12 login-card">
+                <Card>
+                  <LogInForm handleSubmit={this.handleSubmit} />
+                </Card>
               </div>
             </div>
           </div>

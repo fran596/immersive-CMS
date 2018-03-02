@@ -21,7 +21,7 @@ const validate = values => {
 };
 
 const loginForm = ({ handleSubmit, submitting}) => (
-  <Form className="form-signin">
+  <Form className="form-signin login-content">
     <label htmlFor="username" className="font-weight-bold text-left">Username</label>
     <Field 
       name="username" 

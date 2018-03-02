@@ -1,34 +1,27 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer} from 'react-toastify';
+
+/*CSS Styling */
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css'
 import 'antd/dist/antd.css';
+import './styles/wizard.css'
+import './styles/home.css'
+import './styles/page.css'
 
-import { ToastContainer, toast } from 'react-toastify';
 
-import WizardStyles from './styles/wizard.css'
-import HomeStyles from './styles/home.css'
-import PageStyles from './styles/page.css'
-
-import PrivateRoute from './privateRoute'
 
 /*App containers */
 import LoginContainer from './LoginContainer.js/loginContainer'
-
 import WizardWelcome from './WizardContainer/wizardWelcome'
 import WizardForm from './WizardContainer/WizardForm/wizardForm'
-
-
-import WizardRoute from './WizardContainer/wizardRoutes'
-
 import HomeRoute from './HomeContainer/homeContainer'
-
 import TemplateView from './Templates/pageTemplateContainer'
 
-import addPageContainer from './HomeContainer/Page/AddPage/addPageContainer'
+
 
 const App = () => {
-
     return (
       <div>
         <ToastContainer />
@@ -39,7 +32,6 @@ const App = () => {
             <Route path='/welcome' component={WizardWelcome} />
             <Route path='/setup' component={WizardForm} />
             <HomeRoute />    
-            {/* <WizardRoute /> */}
           </Switch>
         </BrowserRouter>
       </div>

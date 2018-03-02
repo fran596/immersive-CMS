@@ -111,7 +111,7 @@ class managePageContainer extends React.Component {
         let editorChange = this.editorChange
        // let isTrueSet = (this.state.home) ?'Yes' :'No'
         return (
-          <div className="container-fluid">
+          <div className="container-fluid home-container">
             <h3>Manage Page</h3>
             <hr />
             <div className="manage-margin">

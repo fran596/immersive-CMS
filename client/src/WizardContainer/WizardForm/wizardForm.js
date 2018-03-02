@@ -63,8 +63,6 @@ class wizardForm extends React.Component {
     let values = this.props.form.values;
     let syncErrors = this.props.form.syncErrors;
     let asycnErrors = this.props.form.asyncErrors
-    console.log(syncErrors)
-    console.log(asycnErrors)
     if (!syncErrors && asycnErrors.dbName === "") {
        this.props.setupUser(this.state, this.props.history)
     }
@@ -87,7 +85,7 @@ class wizardForm extends React.Component {
       <div>
         <ToastContainer />
         <div className="row  mx-auto">
-          <div className="col-sm-12 center ">
+          <div className="col-sm-12 center wizard-container ">
             <Card title="CMS WIZARD SETUP">
               <WizardFormContent
                 state={this.state}

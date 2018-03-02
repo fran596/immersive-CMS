@@ -1,8 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {  reduxForm } from 'redux-form';
-
-import wizardValidator from './wizardValidator'
 import FormRow from './formRow'
 
 const wizardFormContent = (props) => (
@@ -17,14 +14,6 @@ const wizardFormContent = (props) => (
         text="The name of the database you want to use for your CMS"
         onInputChange={props.onInputChange}
       />
-      {/* <FormRow
-        label="Database Port"
-        name="dbPort"
-        type="text"
-        value={props.state.port}
-        text="The port of the database for your CMS. Usually the default port is 27017"
-        onInputChange={props.onInputChange}
-      /> */}
       <FormRow
         label="Site name"
         name="siteName"
@@ -54,9 +43,3 @@ const wizardFormContent = (props) => (
 )
 
 export default wizardFormContent
-
-// export default reduxForm({
-//     form: 'setup-form',
-//     validate: wizardValidator,
-//     enableReinitialize: true
-//   })(wizardFormContent)
