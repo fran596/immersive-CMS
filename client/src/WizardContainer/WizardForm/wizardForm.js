@@ -2,11 +2,11 @@
 import React from 'react'
 import Link from 'valuelink'
 
-import {  reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
-import { setupUser, checkDB } from '../Actions/Creators/actionCreators'
+import { setupUser, checkDB, otherCheck } from '../Actions/Creators/actionCreators'
 import { Card } from 'antd';
 
 
@@ -17,9 +17,6 @@ import WizardFormContent from './wizardFormContent'
 
 /* Validation  for the form */
 import wizardValidator from './wizardValidator'
-import wizardAsyncValidator from './wizardAsyncValidator'
-
-var timer = 1;
 
 class wizardForm extends React.Component {
 
@@ -32,9 +29,6 @@ class wizardForm extends React.Component {
       username: '',
       password: ''
     },
-      //this.onDBnameChange = this.onDBnameChange.bind.this(this)
-    this.checkPrueba = this.checkPrueba.bind(this);
-    this.onDBcheck = this.onDBcheck.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -43,80 +37,52 @@ class wizardForm extends React.Component {
     this.props.checkDB()
   }
 
-  onDBcheck(name) {
-    let dbs = this.props.dbs;
-    let res = true;
-    for (let i = 0; i < dbs.length; ++i) {
-      if (dbs[i] === name) {
-        res = false;
-        break;
-      }
-    }
-    if (dbs.length > 0) {
-      window.clearTimeout(timer)
-    }
-    return res;
-  }
 
   onInputChange(ev, name) {
-    if(name === 'dbName'){
+    if (name === 'dbName') {
+      this.props.otherCheck(ev.target.value)
       this.setState({ db: ev.target.value })
     }
-    else if(name === 'dbPort'){
+    else if (name === 'dbPort') {
       this.setState({ port: ev.target.value })
     }
-    else if(name === 'siteName'){
+    else if (name === 'siteName') {
       this.setState({ site: ev.target.value })
     }
-    else if(name === 'username'){
+    else if (name === 'username') {
       this.setState({ username: ev.target.value })
     }
-    else if(name === 'password'){
+    else if (name === 'password') {
       this.setState({ password: ev.target.value })
     }
-    
+
   }
-
- 
-
-  checkPrueba() {
-    this.props.checkDB();
-    let dbs = this.props.dbs;
-    while (timer--) {
-      window.clearTimeout(timer)
-    }
-  }
-
 
 
   handleSubmit() {
     let values = this.props.form.values;
-    let errors = this.props.form.syncErrors;
-    if(!errors){
-      // this.props.setupUser(this.state, this.props.history)
-      console.log(values)
-      console.log(this.state)
+    let syncErrors = this.props.form.syncErrors;
+    let asycnErrors = this.props.form.asyncErrors
+    console.log(syncErrors)
+    console.log(asycnErrors)
+    if (!syncErrors && asycnErrors.dbName === "") {
+       this.props.setupUser(this.state, this.props.history)
     }
-    else{
-      if(typeof values === 'undefined'){
-        toast.error("Please complete this form",{
+    else {
+      if (typeof values === 'undefined') {
+        toast.error("Please complete this form", {
           position: toast.POSITION.TOP_RIGHT
         });
       }
-      else{
-        toast.error("Please correct the errors on this form",{
+      else {
+        toast.error("Please correct the errors on this form", {
           position: toast.POSITION.TOP_RIGHT
         });
-      } 
+      }
     }
-    // this.props.setupUser(this.state, this.props.history)
   }
 
-
-
   render() {
-
-
     return (
       <div>
         <ToastContainer />
@@ -126,10 +92,10 @@ class wizardForm extends React.Component {
               <WizardFormContent
                 state={this.state}
                 onInputChange={this.onInputChange}
+                handleSubmit={this.handleSubmit}
               />
               <button
-                type="button"
-                  // disabled={dbNameLink.error || portLink.error || siteNameLink.error || usernameLink.error || passwordLink.error}
+                type="submit"
                 className="btn btn-primary wizard-btn"
                 onClick={this.handleSubmit}
               >Submit
@@ -163,17 +129,15 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setupUser: (formData, history) => dispatch(setupUser(formData, history)),
-    checkDB: () => dispatch(checkDB())
+    checkDB: () => dispatch(checkDB()),
+    otherCheck: (name) => dispatch(otherCheck(name))
   }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(wizardForm);
 
 export default reduxForm({
   form: 'setup',
   validate: wizardValidator,
-  asyncValidate: wizardAsyncValidator,
-  asyncBlurFields: [ 'dbName' ],
-  syncErrors:wizardValidator,
+  syncErrors: wizardValidator,
   enableReinitialize: true
 })(connect(mapStateToProps, mapDispatchToProps)(wizardForm))
