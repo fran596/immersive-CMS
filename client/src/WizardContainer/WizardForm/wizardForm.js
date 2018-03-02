@@ -1,22 +1,24 @@
 
 import React from 'react'
 import Link from 'valuelink'
+
+import {  reduxForm } from 'redux-form';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { setupUser, checkDB } from '../Actions/Creators/actionCreators'
 import { Card } from 'antd';
 
+
+
 /*Form containers */
-import FormRowDB from './formRowDB'
-import FormRowPort from './formRowPort'
-import FormRowSiteName from './formRowSiteName'
-import FormRowUserName from './formRowUsername'
-import FormRowPassword from './formRowPassword'
+import WizardFormContent from './wizardFormContent'
 
 
-/* Validation regex for the port input */
-var numberRegexPattern = new RegExp('^[0-9]+$');
+/* Validation  for the form */
+import wizardValidator from './wizardValidator'
+import wizardAsyncValidator from './wizardAsyncValidator'
+
 var timer = 1;
 
 class wizardForm extends React.Component {
@@ -33,8 +35,7 @@ class wizardForm extends React.Component {
       //this.onDBnameChange = this.onDBnameChange.bind.this(this)
     this.checkPrueba = this.checkPrueba.bind(this);
     this.onDBcheck = this.onDBcheck.bind(this);
-    this.onUsernameChange = this.onUsernameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -57,14 +58,26 @@ class wizardForm extends React.Component {
     return res;
   }
 
-  onUsernameChange(ev, uLink) {
-    this.setState({ username: ev.target.value })
-    this.setState({ boolUsername: false })
+  onInputChange(ev, name) {
+    if(name === 'dbName'){
+      this.setState({ db: ev.target.value })
+    }
+    else if(name === 'dbPort'){
+      this.setState({ port: ev.target.value })
+    }
+    else if(name === 'siteName'){
+      this.setState({ site: ev.target.value })
+    }
+    else if(name === 'username'){
+      this.setState({ username: ev.target.value })
+    }
+    else if(name === 'password'){
+      this.setState({ password: ev.target.value })
+    }
+    
   }
 
-  onPasswordChange(ev) {
-    this.setState({ password: ev.target.value })
-  }
+ 
 
   checkPrueba() {
     this.props.checkDB();
@@ -77,53 +90,50 @@ class wizardForm extends React.Component {
 
 
   handleSubmit() {
-    this.props.setupUser(this.state, this.props.history)
+    let values = this.props.form.values;
+    let errors = this.props.form.syncErrors;
+    if(!errors){
+      // this.props.setupUser(this.state, this.props.history)
+      console.log(values)
+      console.log(this.state)
+    }
+    else{
+      if(typeof values === 'undefined'){
+        toast.error("Please complete this form",{
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+      else{
+        toast.error("Please correct the errors on this form",{
+          position: toast.POSITION.TOP_RIGHT
+        });
+      } 
+    }
+    // this.props.setupUser(this.state, this.props.history)
   }
 
 
 
   render() {
-    const dbNameLink = Link.state(this, 'db')
-      .check(x => x, 'Database name is required')
-      .check(x => x.indexOf(' ') < 0, "The database name shouldn't contain spaces")
-      .check(x => this.onDBcheck(x), "This database name is taken. Please choose a different one");
 
-    const portLink = Link.state(this, 'port')
-      .check(x => x.match(numberRegexPattern), 'The port must be a number')
-
-    const siteNameLink = Link.state(this, 'site')
-      .check(x => x, "A site name is required")
-
-    const usernameLink = Link.state(this, 'username')
-      .check(x => x, 'A username is required')
-
-
-
-    const passwordLink = Link.state(this, 'password')
-      .check(x => x, "A password is required")
 
     return (
       <div>
         <ToastContainer />
-  
         <div className="row  mx-auto">
           <div className="col-sm-12 center ">
-          <Card title="CMS WIZARD SETUP">
-            <p className="text-center">Please enter the information below to proceed</p>
-            <form className=" wizard-form " autoComplete="on">
-              <FormRowDB valueLink={dbNameLink} />
-              <FormRowPort valueLink={portLink} />
-              <FormRowSiteName valueLink={siteNameLink} />
-              <FormRowUserName valueLink={usernameLink} onUsernameChange={this.onUsernameChange} valid={this.state.boolUsername} />
-              <FormRowPassword valueLink={passwordLink} />
+            <Card title="CMS WIZARD SETUP">
+              <WizardFormContent
+                state={this.state}
+                onInputChange={this.onInputChange}
+              />
               <button
                 type="button"
-                disabled={dbNameLink.error || portLink.error || siteNameLink.error || usernameLink.error || passwordLink.error}
+                  // disabled={dbNameLink.error || portLink.error || siteNameLink.error || usernameLink.error || passwordLink.error}
                 className="btn btn-primary wizard-btn"
                 onClick={this.handleSubmit}
               >Submit
               </button>
-            </form>
             </Card>
           </div>
         </div>
@@ -145,7 +155,8 @@ wizardForm.defaultProps = {
 function mapStateToProps(state) {
   return {
     dbs: state.wizard.dbs,
-    userAdded: state.wizard.userAdded
+    userAdded: state.wizard.userAdded,
+    form: state.form.setup
   }
 }
 
@@ -156,4 +167,13 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(wizardForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(wizardForm);
+
+export default reduxForm({
+  form: 'setup',
+  validate: wizardValidator,
+  asyncValidate: wizardAsyncValidator,
+  asyncBlurFields: [ 'dbName' ],
+  syncErrors:wizardValidator,
+  enableReinitialize: true
+})(connect(mapStateToProps, mapDispatchToProps)(wizardForm))
