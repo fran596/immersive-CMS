@@ -12,37 +12,41 @@ const pageTemplateHeader = (props) => (
       mode="horizontal"
     >
       {
-        props.pages.map(function (page){
-            if(page.home === true){
-                return (
-                  <Menu.Item key={page._id}>
-                    <Link to="/template" >
-                        Home
+        props.pages.map(function (page) {
+          if (page.home === true) {
+            return (
+              <Menu.Item key={page._id}>
+                <Link to="/template" >
+                  Home
                     </Link>
-                  </Menu.Item>
-                  )
-            }
-            else{
-                return (
-                  <Menu.Item key={page._id}>
-                    <Link to={`/template${page.url}`} >
-                      {page.title}
-                    </Link>
-                  </Menu.Item>
-                  )
-            }
+              </Menu.Item>
+            )
+          }
         })
-    }
+      }
+      {
+        props.pages.map(function (page) {
+          if (page.home !== true) {
+            return (
+              <Menu.Item key={page._id}>
+                <Link to={`/template${page.url}`} >
+                  {page.title}
+                </Link>
+              </Menu.Item>
+            )
+          }
+        })
+      }
     </Menu>
   </div>
 )
 
 pageTemplateHeader.propTypes = {
-    pages : PropTypes.array
+  pages: PropTypes.array
 }
 
 pageTemplateHeader.defaultProps = {
-    pages: []
+  pages: []
 }
 
 export default pageTemplateHeader;
