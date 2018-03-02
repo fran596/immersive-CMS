@@ -34,7 +34,7 @@ class HeaderContainer extends React.Component {
       this.props.user.loading &&
       <nav className="navbar navbar-expand navbar-dark nav-bg" id="header">
         <a onClick={this.onLogoClick} className="sidebar-toggle text-light mr-3"><i className="fa fa-bars" /></a>
-        <a className="navbar-brand" href="#"><i className="fa fa-code-branch" /> Navbar</a>
+        <a className="navbar-brand" href="/home"><i className="fa fa-code-branch" /> CMS</a>
         <div className="navbar-collapse collapse">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">

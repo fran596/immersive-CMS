@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button, Form } from 'antd';
 
@@ -33,6 +34,8 @@ const loginForm = ({ handleSubmit, submitting}) => (
     <Field name="password" type="password" component={InputField} className="form-control" />
     
     <Button type="primary" onClick={handleSubmit} disabled={submitting} className="btn btn-lg btn-primary btn-block btn-login" >Login</Button>
+
+    <Link to="/welcome">Don't have an installation? Click to install the CMS </Link>
   </Form>
 )
 
