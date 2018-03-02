@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { Select } from 'antd'
 import PropTypes from 'prop-types'
-
+import { Button } from 'antd'
 import validate from './managePagevalidation'
 
 /*Other container dependencies */
@@ -12,7 +12,7 @@ import InputField from '../../../validatedInputField'
 const managePageForm = ({ title, url, home, onInputChange, onDeletePage, onSelectChange}) => (
   <div>
     <div className="row mx-auto">
-    <label htmlFor="select" className="font-weight-bold  ">Home page</label>
+    <label htmlFor="select" className="font-weight-bold  ">Mark as home page</label>
     </div>
     <div className="row mx-auto">
     
@@ -49,7 +49,7 @@ const managePageForm = ({ title, url, home, onInputChange, onDeletePage, onSelec
         />
       </div>
       <div className="col-2-md manage-btn">
-        <button type="button" className="btn btn-danger" onClick={onDeletePage}>Delete Page</button>
+        <Button type="danger" className="btn btn-danger" onClick={onDeletePage}>Delete Page</Button>
       </div>
     </form>
   </div>

@@ -5,6 +5,7 @@ import htmlToDraft from 'html-to-draftjs'
 
 import { connect } from 'react-redux'
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
+import { Button } from 'antd'
 
 /*Actions*/
 import {managePage, deletePage,} from './Actions/Creators/actionCreators'
@@ -133,7 +134,7 @@ class managePageContainer extends React.Component {
             </div>
             <div className="row mx-auto ">
               <div className="col-sm-12" >
-                <button onClick={this.handleSubmit} className="btn btn-primary wizard-btn">Save changes</button>
+                <Button type="primary" onClick={this.handleSubmit} className="btn btn-primary wizard-btn">Save changes</Button>
               </div>
             </div>
           </div>

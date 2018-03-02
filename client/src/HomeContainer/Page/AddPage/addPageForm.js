@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types'
+import { Button } from 'antd'
 
 /*Other container dependencies */
 import InputField from '../../../validatedInputField'
@@ -39,7 +40,7 @@ const addPageForm = ({ handleSubmit, submitting}) => (
         <p>The url to get to this new page</p>
       </div>
     </div>
-    <button type="button" onClick={handleSubmit} disabled={submitting} className="btn btn-primary wizard-btn" >Submit</button>
+    <Button type="primary" onClick={handleSubmit} disabled={submitting} className="btn btn-primary wizard-btn" >Submit</Button>
   </form>
 )
 
