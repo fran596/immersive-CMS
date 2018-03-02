@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Timeline, Card } from 'antd';
 
+import {getPages} from './Page/AddPage/Actions/Creators/actionCreators'
+
 class dashboardContainer extends React.Component {
 
   constructor(props) {
@@ -10,7 +12,12 @@ class dashboardContainer extends React.Component {
     this.formatDate = this.formatDate.bind(this);
   }
 
+  componentWillMount() {
+    this.props.getPages()
+  }
+
   formatDate(date) {
+    console.log(date)
     var monthNames = [
       "January", "February", "March",
       "April", "May", "June", "July",
@@ -21,8 +28,15 @@ class dashboardContainer extends React.Component {
     let day = date.getDate();
     let monthIndex = date.getMonth();
     let year = date.getFullYear();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds()
 
-    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    return (
+      day + ' ' 
+      + monthNames[monthIndex] + ' ' 
+      + year + ', '
+      + hour + ':' + minutes + ':' + seconds ); 
   }
 
   render() {
@@ -79,11 +93,13 @@ class dashboardContainer extends React.Component {
 }
 
 dashboardContainer.propTypes = {
-  activity: PropTypes.array
+  activity: PropTypes.array,
+  getPages: PropTypes.func,
 }
 
 dashboardContainer.defaultProps = {
-  activity: []
+  activity: [],
+  getPages: ()=>{},
 }
 
 function mapStateToProps(state) {
@@ -95,7 +111,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    getPages: () => dispatch(getPages())
   }
 }
 

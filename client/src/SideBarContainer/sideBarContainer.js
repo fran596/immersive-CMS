@@ -14,6 +14,7 @@ class SideBarContainer extends React.Component {
   componentWillMount() {
     this.props.getPages()
   }
+  
 
   onLogoClick(ev){
     console.log(ev.target.parentElement)

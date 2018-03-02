@@ -40,6 +40,7 @@ class managePageContainer extends React.Component {
             this.setState({title: nextProps.location.state.page.title})
             this.setState({url: nextProps.location.state.page.url})
             this.setState({home: nextProps.location.state.page.home})
+            this.setState({content: nextProps.location.state.page.content})
             if(nextProps.location.state.page.home){
                 this.setState({homeString: 'Yes'})
             }
@@ -134,7 +135,12 @@ class managePageContainer extends React.Component {
             </div>
             <div className="row mx-auto ">
               <div className="col-sm-12" >
-                <Button type="primary" onClick={this.handleSubmit} className="btn btn-primary wizard-btn">Save changes</Button>
+                <Button 
+                  type="primary" 
+                  onClick={this.handleSubmit} 
+                  className="btn btn-primary wizard-btn"
+                >Save changes
+                </Button>
               </div>
             </div>
           </div>
